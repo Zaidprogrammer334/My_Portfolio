@@ -2,29 +2,44 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- تحسين meta viewport لضمان التوافق مع جميع الأجهزة -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Zaid Ayman | Portfolio</title>
     <style>
+        /* استخدام وحدات rem وخط أساس مرن */
+        :root {
+            font-size: 16px;
+            --primary-color: #5470d4;
+            --secondary-color: #2c3e50;
+            --text-color: #333;
+            --light-bg: #ffffff;
+            --dark-bg: #5470d4;
+            --transition: all 0.3s ease;
+        }
+
         body {
             font-family: 'Tajawal', Arial, sans-serif;
-            background-color: #5470d4;
-            color: #333;
+            background-color: var(--primary-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            padding-top: 70px;
+            padding-top: 70px; /* تعويض شريط التنقل الثابت */
         }
-        
+
+        /* شريط تنقل متجاوب */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 15px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 0.8rem 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            transition: top 0.3s ease;
+            backdrop-filter: blur(5px);
         }
-        
+
         .navbar-container {
             max-width: 1200px;
             width: 90%;
@@ -32,118 +47,155 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-        
+
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #2c3e50;
+            color: var(--secondary-color);
             text-decoration: none;
+            letter-spacing: 1px;
         }
-        
+
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        
+
         .nav-links a {
-            color: #2c3e50;
+            color: var(--secondary-color);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 5px 10px;
+            transition: var(--transition);
+            padding: 0.3rem 0.8rem;
             border-radius: 5px;
+            font-size: 1rem;
+            white-space: nowrap;
         }
-        
+
         .nav-links a:hover {
-            color: #5470d4;
+            color: var(--primary-color);
             background-color: rgba(84, 112, 212, 0.1);
         }
-        
+
+        /* الحاوية الرئيسية */
         .container {
-            background-color: #ffffff;
+            background-color: var(--light-bg);
             width: 100%;
             display: flex;
-            align-items: flex-start;
-            gap: 40px;
-            padding: 40px 0;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
+
         .content-wrapper {
             max-width: 1200px;
             width: 100%;
-            margin: 0 auto;
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        
+
         .text-content {
             flex: 1;
+            min-width: 280px;
             text-align: right;
-            padding: 0 20px;
+            padding: 0 1rem;
         }
-        
+
         .image-container {
-            width: 200px;
-            height: 200px;
+            width: min(200px, 40vw);
+            height: min(200px, 40vw);
             border-radius: 10px;
             overflow: hidden;
             border: 3px solid #f1f1f1;
-            margin-left: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
-        
+
         .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
         }
-        
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
         h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 2.2em;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
         }
-        
+
         .title {
-            font-size: 1.2em;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: #7f8c8d;
-            margin-bottom: 30px;
+            margin-bottom: 1.5rem;
         }
-        
+
         .divider {
             height: 2px;
-            background: linear-gradient(to right, transparent, #5470d4, transparent);
-            margin: 25px 0;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            margin: 1.5rem 0;
         }
-        
+
         .bio {
-            font-size: 1.1em;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
             color: #34495e;
-            margin-top: 20px;
+            margin-top: 1rem;
             text-align: right;
         }
 
-        .experience-section {
-            background-color: #5470d4;
-            padding: 80px 0;
+        /* أقسام الخبرات والمشاريع والشهادات */
+        .experience-section,
+        .projects-section,
+        .certificates-section,
+        .contact-section {
+            padding: 4rem 1rem;
             width: 100%;
         }
 
-        .experience-wrapper {
+        .experience-section,
+        .certificates-section {
+            background-color: var(--dark-bg);
+        }
+
+        .projects-section,
+        .contact-section {
+            background-color: var(--light-bg);
+        }
+
+        .experience-wrapper,
+        .projects-wrapper,
+        .certificates-wrapper,
+        .contact-wrapper {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 1rem;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             color: white;
-            margin-bottom: 40px;
+            margin-bottom: 3rem;
             position: relative;
+        }
+
+        .projects-section .section-title,
+        .contact-section .section-title {
+            color: var(--secondary-color);
         }
 
         .section-title::after {
@@ -151,14 +203,15 @@
             display: block;
             width: 80px;
             height: 3px;
-            background: #ffffff;
-            margin: 15px auto;
+            background: currentColor;
+            margin: 0.8rem auto 0;
+            opacity: 0.8;
         }
 
         .experience-content {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 3rem;
             justify-content: center;
         }
 
@@ -169,15 +222,16 @@
         }
 
         .experience-text h3 {
-            font-size: 1.5rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: white;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
 
         .experience-text p {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
             color: white;
+            line-height: 1.8;
         }
 
         .skills {
@@ -186,24 +240,24 @@
         }
 
         .skills h3 {
-            font-size: 1.5rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: white;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
             text-align: right;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
         }
 
         .skill-item {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
-            padding: 20px 10px;
+            padding: 1.2rem 0.5rem;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
@@ -214,14 +268,14 @@
 
         .skill-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             background: white;
         }
 
         .skill-item i {
-            font-size: 40px;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
         }
 
         .skill-item:hover i {
@@ -231,28 +285,16 @@
         .skill-item p {
             margin: 0;
             font-weight: 600;
-            color: #2c3e50;
-            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
         }
 
-        .projects-section {
-            background-color: white;
-            padding: 80px 0;
-            width: 100%;
-        }
-
-        .projects-wrapper {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
+        /* شبكة المشاريع */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0;
         }
 
         .project-card {
@@ -260,18 +302,22 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: 1px solid #eee;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
         .project-image {
             height: 200px;
             overflow: hidden;
+            background: #f5f5f5;
         }
 
         .project-image img {
@@ -286,37 +332,44 @@
         }
 
         .project-content {
-            padding: 20px;
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-title {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
         }
 
         .project-description {
             color: #7f8c8d;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
             font-size: 0.95rem;
+            flex: 1;
         }
 
         .project-footer {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
             border-top: 1px solid #eee;
-            color: #5470d4;
+            color: var(--primary-color);
             font-size: 0.9rem;
         }
 
         .project-link {
-            color: #5470d4;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            white-space: nowrap;
         }
 
         .project-link:hover {
@@ -324,24 +377,12 @@
             text-decoration: underline;
         }
 
-        .certificates-section {
-            background-color: #5470d4;
-            padding: 80px 0;
-            width: 100%;
-        }
-
-        .certificates-wrapper {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
+        /* شبكة الشهادات - متجاوبة تماماً */
         .certificates-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0;
         }
 
         .certificate-card {
@@ -349,25 +390,39 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: 1px solid #eee;
             display: flex;
-            height: 350px;
+            flex-direction: row;
+            min-height: 250px;
+            height: auto;
+        }
+
+        @media (max-width: 640px) {
+            .certificate-card {
+                flex-direction: column;
+            }
         }
 
         .certificate-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
         .certificate-image {
-            width: 80%;
-            height: 100%;
-            overflow: hidden;
+            width: 70%;
+            background: #f1f1f1;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f1f1f1;
+            overflow: hidden;
+        }
+
+        @media (max-width: 640px) {
+            .certificate-image {
+                width: 100%;
+                height: 200px;
+            }
         }
 
         .certificate-image img {
@@ -382,8 +437,8 @@
         }
 
         .certificate-content {
-            width: 20%;
-            padding: 20px;
+            width: 30%;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -391,10 +446,18 @@
             background: white;
         }
 
+        @media (max-width: 640px) {
+            .certificate-content {
+                width: 100%;
+                padding: 1rem;
+            }
+        }
+
         .certificate-title {
-            font-size: 1.2rem;
-            color: #2c3e50;
-            margin-bottom: 8px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
         }
 
         .certificate-description {
@@ -402,28 +465,17 @@
             font-size: 0.9rem;
         }
 
-        .contact-section {
-            background-color: white;
-            padding: 80px 0;
-            width: 100%;
-        }
-
-        .contact-wrapper {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
+        /* قسم التواصل */
         .contact-content {
             display: flex;
             justify-content: center;
+            padding: 0 1rem;
         }
 
         .contact-info {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 1.5rem;
             justify-content: center;
             max-width: 800px;
         }
@@ -431,13 +483,15 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            color: #2c3e50;
-            padding: 10px 20px;
+            gap: 0.8rem;
+            font-size: 1rem;
+            color: var(--secondary-color);
+            padding: 0.8rem 1.5rem;
             background-color: #f8f9fa;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .contact-item:hover {
@@ -446,15 +500,17 @@
         }
 
         .contact-item i {
-            color: #5470d4;
+            color: var(--primary-color);
             font-size: 1.2rem;
         }
 
         .contact-link {
-            color: #2c3e50;
+            color: var(--secondary-color);
             text-decoration: none;
+            word-break: break-word;
         }
 
+        /* تأثيرات الظهور */
         .hidden {
             opacity: 0;
             transform: translateY(50px);
@@ -481,83 +537,76 @@
             animation: fadeInUp 0.8s ease forwards;
         }
         
-        .delay-1 {
-            animation-delay: 0.2s;
-        }
-        
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
-        
-        .delay-3 {
-            animation-delay: 0.6s;
-        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
 
-        @media (max-width: 768px) {
+        /* تحسينات إضافية للشاشات الصغيرة جداً */
+        @media (max-width: 480px) {
+            :root {
+                font-size: 14px;
+            }
+            
             body {
-                padding-top: 120px;
+                padding-top: 90px;
             }
             
             .navbar-container {
                 flex-direction: column;
-                gap: 15px;
+                text-align: center;
             }
             
             .nav-links {
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
+                gap: 0.5rem;
+            }
+            
+            .nav-links a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.9rem;
             }
             
             .content-wrapper {
-                flex-direction: column-reverse;
-                padding: 30px;
+                gap: 1.5rem;
             }
             
             .image-container {
-                width: 150px;
-                height: 150px;
-                margin-bottom: 20px;
-                margin-left: 0;
-            }
-            
-            .text-content {
-                padding: 0;
-            }
-
-            .experience-content {
-                flex-direction: column;
+                width: 140px;
+                height: 140px;
             }
             
             .skills-grid {
-                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
             }
             
-            .projects-grid,
-            .certificates-grid {
-                grid-template-columns: 1fr;
-                padding: 0 10px;
+            .project-footer {
+                flex-direction: column;
+                align-items: flex-start;
             }
             
+            .contact-item {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* تحسينات للشاشات المتوسطة */
+        @media (min-width: 768px) and (max-width: 1024px) {
             .certificate-card {
-                flex-direction: column;
-                height: auto;
+                min-height: 220px;
             }
-            
-            .certificate-image {
-                width: 100%;
-                height: 250px;
-            }
-            
-            .certificate-content {
-                width: 100%;
-                padding: 15px;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-            }
+        }
+
+        /* ضمان عدم تجاوز المحتوى */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* تحسين التمرير السلس */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
     </style>
     <link rel="icon" type="image/png" href="icon.png">
@@ -593,7 +642,7 @@
             </div>
             
             <div class="image-container">
-                <img src="365_20241012191345.png" alt="Zaid_Dev">
+                <img src="365_20241012191345.png" alt="Zaid_Dev" loading="lazy">
             </div>
         </div>
     </div>
@@ -610,42 +659,15 @@
                 <div class="skills">
                     <h3>المهارات والتقنيات</h3>
                     <div class="skills-grid">
-                        <div class="skill-item">
-                            <i class="devicon-html5-plain colored"></i>
-                            <p>HTML</p>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-css3-plain colored"></i>
-                            <p>CSS</p>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-javascript-plain colored"></i>
-                            <p>JavaScript</p>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-python-plain colored"></i>
-                            <p>Python</p>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-cplusplus-plain colored"></i>
-                            <p>C++</p>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-godot-plain"></i>
-                            <p>Godot</p>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-premierepro-plain colored"></i>
-                            <p>Premiere Pro</p>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-aftereffects-plain colored"></i>
-                            <p>After Effects</p>
-                        </div>
-                        <div class="skill-item">
-                            <i class="devicon-photoshop-plain colored"></i>
-                            <p>Photoshop</p>
-                        </div>
+                        <div class="skill-item"><i class="devicon-html5-plain colored"></i><p>HTML</p></div>
+                        <div class="skill-item"><i class="devicon-css3-plain colored"></i><p>CSS</p></div>
+                        <div class="skill-item"><i class="devicon-javascript-plain colored"></i><p>JavaScript</p></div>
+                        <div class="skill-item"><i class="devicon-python-plain colored"></i><p>Python</p></div>
+                        <div class="skill-item"><i class="devicon-cplusplus-plain colored"></i><p>C++</p></div>
+                        <div class="skill-item"><i class="devicon-godot-plain"></i><p>Godot</p></div>
+                        <div class="skill-item"><i class="devicon-premierepro-plain colored"></i><p>Premiere Pro</p></div>
+                        <div class="skill-item"><i class="devicon-aftereffects-plain colored"></i><p>After Effects</p></div>
+                        <div class="skill-item"><i class="devicon-photoshop-plain colored"></i><p>Photoshop</p></div>
                     </div>
                 </div>
             </div>
@@ -654,12 +676,10 @@
 
     <section class="projects-section hidden" id="projects">
         <div class="projects-wrapper">
-            <h2 class="section-title" style="color: #2c3e50;">ابرز مشاريعي</h2>
+            <h2 class="section-title">ابرز مشاريعي</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="ProjectLogo.png" alt="المشروع الأول">
-                    </div>
+                    <div class="project-image"><img src="ProjectLogo.png" alt="مشروع توبة" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title">مشروع توبة</h3>   
                         <p class="project-description">موقع يساعد المسلمين على التوبة</p>
@@ -672,9 +692,7 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="thumbnail (8).jpeg" alt="المشروع الثاني">
-                    </div>
+                    <div class="project-image"><img src="thumbnail (8).jpeg" alt="مونتاج فيديو" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title">مونتاج فيديو ليوتيوبر</h3>
                         <p class="project-description">اعداد فيديو كامل لاحد اليوتيوبر بفكرة تحدي برمجي</p>
@@ -686,9 +704,7 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="thumbnail (9).jpeg" alt="المشروع الثالث">
-                    </div>
+                    <div class="project-image"><img src="thumbnail (9).jpeg" alt="لعبة Platformer" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title">لعبة Platformer 2D</h3>
                         <p class="project-description">لعبة ثنائية الأبعاد تم تطويرها باستخدام محرك Godot</p>
@@ -700,9 +716,7 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="thumbnail (10).jpeg" alt="المشروع الرابع">
-                    </div>
+                    <div class="project-image"><img src="thumbnail (10).jpeg" alt="كورس تطوير العاب" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title">كورس تطوير العاب للمبتدئين</h3>
                         <p class="project-description">كورس تطوير العاب للمبتدئين بالتعاون مع اكادمية حاسوب</p>
@@ -714,9 +728,7 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="thumbnail (11).jpeg" alt="المشروع الخامس">
-                    </div>
+                    <div class="project-image"><img src="thumbnail (11).jpeg" alt="فيديو Gdscript" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title">فيديو يشرح لغة Gdscript</h3>
                         <p class="project-description">فيديو بسيط يشرح لغة Gdscript بالتعاون مع اكادمية حاسوب</p>
@@ -728,9 +740,7 @@
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="thumbnail (12).jpeg" alt="المشروع السادس">
-                    </div>
+                    <div class="project-image"><img src="thumbnail (12).jpeg" alt="كورس تعليمي" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title">كورس تعليمي لمجال تطوير الالعاب</h3>
                         <p class="project-description">كورس كامل يشرح اساسيات تطوير الالعاب بابسط طريقة</p>
@@ -742,9 +752,7 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="Untitled-4.png" alt="المشروع السابع">
-                    </div>
+                    <div class="project-image"><img src="Untitled-4.png" alt="موقع ويب" loading="lazy"></div>
                     <div class="project-content">
                         <h3 class="project-title">موقع ويب</h3>
                         <p class="project-description">موقع ويب للشراء والبيع</p>
@@ -760,199 +768,124 @@
 
     <section class="certificates-section hidden" id="certificates">
         <div class="certificates-wrapper">
-            <h2 class="section-title" style="color: #ffffff;">شهاداتي</h2>
+            <h2 class="section-title">شهاداتي</h2>
             <div class="certificates-grid">
-                <div class="certificate-card" style="background-color: #2c3e50;">
-                    <div class="certificate-image">
-                        <img src="Diploma_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">Diploma of Technology</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
-                </div>
-                
+                <!-- جميع الشهادات بنفس الترتيب مع تحسين الأداء بإضافة loading="lazy" -->
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 10_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">ENTREPENURSHIP</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="Diploma_1.jpg" alt="Diploma of Technology" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">Diploma of Technology</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 09_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">WEB DEVELOPMENT</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 10_1.jpg" alt="ENTREPENURSHIP" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">ENTREPENURSHIP</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 08_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">Python 102</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 09_1.jpg" alt="WEB DEVELOPMENT" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">WEB DEVELOPMENT</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-                
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 07_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">Python 101</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 08_1.jpg" alt="Python 102" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">Python 102</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-                                
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 06_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">RENEWABLE ENERGY</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 07_1.jpg" alt="Python 101" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">Python 101</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 04_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">IOT</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 06_1.jpg" alt="RENEWABLE ENERGY" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">RENEWABLE ENERGY</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="L 03_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">MECHANICAL ENGINEERING</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 04_1.jpg" alt="IOT" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">IOT</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 03_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">ELECTRONICS</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="L 03_1.jpg" alt="MECHANICAL ENGINEERING" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">MECHANICAL ENGINEERING</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 02_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">ELECTRICAL ENGINEERING</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 03_1.jpg" alt="ELECTRONICS" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">ELECTRONICS</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="certificate6.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">++C</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 02_1.jpg" alt="ELECTRICAL ENGINEERING" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">ELECTRICAL ENGINEERING</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 05_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">ADVANCED ROBOTICS</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="certificate6.jpg" alt="++C" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">++C</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
-
                 <div class="certificate-card">
-                    <div class="certificate-image">
-                        <img src="B 01_1.jpg">
-                    </div>
-                    <div class="certificate-content">
-                        <h3 class="certificate-title">ROBOTICS</h3>
-                        <p class="certificate-description">Eureka - 2024</p>
-                    </div>
+                    <div class="certificate-image"><img src="B 05_1.jpg" alt="ADVANCED ROBOTICS" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">ADVANCED ROBOTICS</h3><p class="certificate-description">Eureka - 2024</p></div>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-image"><img src="B 01_1.jpg" alt="ROBOTICS" loading="lazy"></div>
+                    <div class="certificate-content"><h3 class="certificate-title">ROBOTICS</h3><p class="certificate-description">Eureka - 2024</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-<section class="contact-section hidden" id="contact">
-    <div class="contact-wrapper">
-        <h2 class="section-title" style="color: #2c3e50;">تواصل معي</h2>
-        <div class="contact-content">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-copyright"></i>
-                    <span>جميع الحقوق محفوظة</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-youtube"></i>
-                    <a href="https://www.youtube.com/@Zaid_Dev9878" target="_blank" class="contact-link">قناتي على اليوتيوب</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-discord"></i>
-                    <a href="https://discord.gg/KTaX2zNUQF" target="_blank" class="contact-link">سيرفر الديسكورد</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:zaidcommunication497@gmail.com" class="contact-link">zaidcommunication497@gmail.com</a>
+    <section class="contact-section hidden" id="contact">
+        <div class="contact-wrapper">
+            <h2 class="section-title">تواصل معي</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fas fa-copyright"></i><span>جميع الحقوق محفوظة</span></div>
+                    <div class="contact-item"><i class="fab fa-youtube"></i><a href="https://www.youtube.com/@Zaid_Dev9878" target="_blank" class="contact-link">قناتي على اليوتيوب</a></div>
+                    <div class="contact-item"><i class="fab fa-discord"></i><a href="https://discord.gg/KTaX2zNUQF" target="_blank" class="contact-link">سيرفر الديسكورد</a></div>
+                    <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:zaidcommunication497@gmail.com" class="contact-link">zaidcommunication497@gmail.com</a></div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <script>
+        // تحسين أداء Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show', 'animate');
                     
+                    // إضافة تأثيرات التأخير للعناصر الداخلية
                     const items = entry.target.querySelectorAll('.skill-item, .project-card, .certificate-card, .contact-item');
                     items.forEach((item, index) => {
-                        item.classList.add(`delay-${index % 3}`);
+                        item.classList.add(`delay-${(index % 3) + 1}`);
                     });
+                    
+                    // يمكن إلغاء المراقبة بعد الظهور لتحسين الأداء
+                    observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.1,
+            rootMargin: '50px'
         });
         
+        // مراقبة العناصر المخفية
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach(el => observer.observe(el));
 
+        // تمرير سلس للروابط
         document.querySelectorAll('.nav-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                if (targetElement) {
+                    const offset = 80; // ارتفاع شريط التنقل
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({
+                        top: elementPosition - offset,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
+        // إخفاء شريط التنقل عند التمرير لأسفل (للأجهزة المحمولة)
         let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
@@ -964,12 +897,14 @@
             }
             
             if (currentScroll > lastScroll && currentScroll > 100) {
-                navbar.style.top = '-80px';
+                navbar.style.top = '-100px'; // زيادة الإخفاء
             } else {
                 navbar.style.top = '0';
             }
             lastScroll = currentScroll;
         });
+
+        // تحميل الصور بتقنية Lazy Loading بشكل افتراضي (المتصفحات الحديثة تدعمها)
     </script>
 </body>
 </html>
